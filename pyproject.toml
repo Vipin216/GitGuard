@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gitguard"
+version = "0.1.0"
+description = "Lightweight DevSecOps secret detection and prevention tool"
+requires-python = ">=3.10"
+
+[project.scripts]
+gitguard = "gitguard.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gitguard*"]
