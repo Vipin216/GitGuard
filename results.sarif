@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "GitGuard",
+          "version": "0.1.0",
+          "informationUri": "https://github.com/Vipin216/GitGuard"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "AWS Access Key",
+          "level": "error",
+          "message": {
+            "text": "AWS Access Key detected with HIGH confidence."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests\\sarif_test.py"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

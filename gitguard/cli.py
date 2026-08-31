@@ -5,6 +5,7 @@ from gitguard.scanner import scan_repository
 from gitguard.reporter import (
     print_terminal_report,
     generate_json_report,
+    write_sarif_report,
 )
 from gitguard.history import scan_git_history
 from gitguard.hooks import install_pre_commit_hook
@@ -22,6 +23,8 @@ def main():
     scan_parser = subparsers.add_parser("scan",help="Scan a repository for potential secrets")
     scan_parser.add_argument("path",help="Path to the repository")
     scan_parser.add_argument("--format",choices=["text", "json"],default="text",help="Output format")
+    scan_parser.add_argument("--sarif",metavar="PATH",help="Write SARIF report to PATH")
+
 
     history_parser = subparsers.add_parser("history",help="Scan Git history for potential secrets")
     history_parser.add_argument("path",help="Path to the repository")
@@ -58,6 +61,11 @@ def main():
         else:
 
             print_terminal_report(files_scanned,findings)
+
+
+        if args.sarif:
+
+            write_sarif_report(files_scanned,findings,args.sarif)    
 
         if findings:
             return 1
