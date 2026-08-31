@@ -1,2 +1,0 @@
-API_KEY = None
-AWS_ACCESS_KEY_ID = None
