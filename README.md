@@ -148,39 +148,41 @@ The actual credential is never printed.
 # Architecture
 
 ```text
-                         GitGuard
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-         Local Usage                 CI/CD Usage
-              │                           │
-       ┌──────┴──────┐              GitHub Actions
-       │             │                    │
-   Repository    Pre-Commit               │
-     Scan           Hook                  │
-       │             │                    │
-       │       Staged Files               │
-       │             │                    │
-       └─────────────┴──────────┬─────────┘
-                                ↓
-                        Detection Engine
-                                │
-                 ┌──────────────┼──────────────┐
-                 ↓              ↓              ↓
-              Regex          Context        Entropy
-            Detection        Filtering       Analysis
-                 └──────────────┼──────────────┘
-                                ↓
-                         Finding Aggregation
-                                │
-                    ┌───────────┴───────────┐
-                    ↓                       ↓
-                Terminal                Reporting
-                  Output               ┌────┴────┐
-                                       ↓         ↓
-                                      JSON     SARIF
-                                                 ↓
-                                        GitHub Code Scanning
+                              GitGuard
+                                 │
+                   ┌─────────────┴────────────┐
+                   │                          │
+              Local Usage                 CI/CD Usage
+                   │                          │
+        ┌──────────┼──────────┐         GitHub Actions
+        │          │          │               │
+        ▼          ▼          ▼               │
+   Repository  Pre-Commit  Git History        │
+      Scan        Hook        Scan            │
+        │          │          │               │
+        │     Staged Files    │               │
+        │          │          │               │
+        └──────────┴──────────┴───────┬───────┘
+                                      ▼
+                              Detection Engine
+                                      │
+                       ┌──────────────┼──────────────┐
+                       ▼              ▼              ▼
+                    Regex          Context        Entropy
+                  Detection        Filtering       Analysis
+                       └──────────────┼──────────────┘
+                                      ▼
+                              Finding Aggregation
+                                      │
+                         ┌────────────┴────────────┐
+                         ▼                         ▼
+                    Terminal                 Reporting
+                     Output                 ┌──────┴──────┐
+                                           ▼             ▼
+                                         JSON          SARIF
+                                                         │
+                                                         ▼
+                                               GitHub Code Scanning
 ```
 
 ---
